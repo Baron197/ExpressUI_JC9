@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ManageCategory from './components/ManageCategory';
 
 class App extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ class App extends Component {
       <div>
         <h1>Selamat datang di Popok Kece!</h1>
         <input type="button" value="Add Product" onClick={this.onBtnAddClick} />
+        <ManageCategory />
       </div>
     )
   }
