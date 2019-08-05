@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { getListCategory } from '../actions';
+import { getListCategory, addCategory } from '../actions';
 
 class ManageCategory extends Component {
     componentDidMount() {
-        axios.get('http://localhost:1997/category')
-        .then((res) => {
-            this.props.getListCategory(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+        this.props.getListCategory();
+    }
+
+    onBtnAddCatClick = () => {
+        this.props.addCategory(this.refs.namaCatAdd.value)
     }
 
     renderListCategory = () => {
@@ -20,33 +18,54 @@ class ManageCategory extends Component {
                 <tr>
                     <td>{item.id}</td>
                     <td>{item.nama}</td>
+                    <td><input type="button" value="Edit" /></td>
+                    <td><input type="button" value="Delete" /></td>
                 </tr>
             )
         })
     }
 
+    renderButtonAdd = () => {
+        if(this.props.categoryForm.loadingAdd) {
+            return 'Loading...'
+        }
+        return <input type="button" value="Add" onClick={this.onBtnAddCatClick} />
+    }
+
     render() {
         return (
-            <div>
-                <h2>Table Category</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nama</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderListCategory()}
-                    </tbody>
-                </table>
-            </div>
+            <center>
+                <div>
+                    <h2>Table Category</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nama</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.renderListCategory()}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td><input type="text" ref="namaCatAdd" /></td>
+                                <td>{this.renderButtonAdd()}</td>
+                                <td>{this.props.categoryForm.statusAdd}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </center>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    return { listCategory: state.categoryList }
+    return { listCategory: state.categoryList, categoryForm: state.formCategory }
 }
 
-export default connect(mapStateToProps, { getListCategory })(ManageCategory);
+export default connect(mapStateToProps, { getListCategory, addCategory })(ManageCategory);

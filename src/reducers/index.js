@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import CategoryListReducer from './CategoryListReducer';
+import FormCategoryReducer from './FormCategoryReducer';
 
 export default combineReducers({
-    categoryList: CategoryListReducer
+    categoryList: CategoryListReducer,
+    formCategory: FormCategoryReducer
 });
