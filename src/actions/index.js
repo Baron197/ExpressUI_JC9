@@ -38,3 +38,13 @@ export const addCategory = (cat) => {
         })
     }
 }
+
+// var contoh = () => {
+//     return (test) => {
+//         test('hello')
+//     }
+// }
+
+// var a = contoh
+// var b = contoh()
+// b(console.log)

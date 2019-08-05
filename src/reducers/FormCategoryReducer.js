@@ -18,3 +18,8 @@ export default (state=INITIAL_STATE, action) => {
             return state
     }
 }
+
+var obj = { nama: 'Baron', usia: 22, pekerjaan: 'Guru' }
+
+var newobj = { ...obj, nama:'Naruto', usia: 17 }
+var newobj = { nama:'Naruto', usia: 17 }
