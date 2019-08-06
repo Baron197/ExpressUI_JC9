@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import axios from 'axios';
-import { getListCategory, addCategory } from '../actions';
+import { getListCategory, addCategory, deleteCategory } from '../actions';
 
 class ManageCategory extends Component {
     componentDidMount() {
@@ -12,14 +12,20 @@ class ManageCategory extends Component {
         this.props.addCategory(this.refs.namaCatAdd.value)
     }
 
+    onBtnDeleteCatClick = (id) => {
+        this.props.deleteCategory(id)
+    }
+
     renderListCategory = () => {
         return this.props.listCategory.map((item) => {
             return (
-                <tr>
+                <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.nama}</td>
                     <td><input type="button" value="Edit" /></td>
-                    <td><input type="button" value="Delete" /></td>
+                    <td>
+                        <input type="button" value="Delete" onClick={() => this.onBtnDeleteCatClick(item.id)} />
+                    </td>
                 </tr>
             )
         })
@@ -68,4 +74,4 @@ const mapStateToProps = (state) => {
     return { listCategory: state.categoryList, categoryForm: state.formCategory }
 }
 
-export default connect(mapStateToProps, { getListCategory, addCategory })(ManageCategory);
+export default connect(mapStateToProps, { getListCategory, addCategory, deleteCategory })(ManageCategory);

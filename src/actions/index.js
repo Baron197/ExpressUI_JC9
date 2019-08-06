@@ -39,6 +39,17 @@ export const addCategory = (cat) => {
     }
 }
 
+export const deleteCategory = (id) => {
+    return (dispatch) => {
+        axios.delete(`http://localhost:1997/category/${id}`)
+            .then((res) => {
+                dispatch({ type: 'ISI_CATEGORY_LIST', payload: res.data })
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
+}
+
 // var contoh = () => {
 //     return (test) => {
 //         test('hello')
