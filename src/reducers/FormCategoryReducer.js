@@ -1,4 +1,4 @@
-const INITIAL_STATE = { loadingAdd: false, statusAdd: '' }
+const INITIAL_STATE = { loadingAdd: false, statusAdd: '', selectedEditId: 0 }
 
 export default (state=INITIAL_STATE, action) => {
     switch(action.type) {
@@ -13,6 +13,11 @@ export default (state=INITIAL_STATE, action) => {
                 ...state, 
                 loadingAdd: false, 
                 statusAdd: action.payload
+            }
+        case 'Edit_Cancel_Category' :
+            return {
+                ...state,
+                selectedEditId: action.payload
             }
         default :
             return state

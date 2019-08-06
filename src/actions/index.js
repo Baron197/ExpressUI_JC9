@@ -50,6 +50,13 @@ export const deleteCategory = (id) => {
     }
 }
 
+export const editCancelCategory = (id) => {
+    return {
+        type: 'Edit_Cancel_Category',
+        payload: id
+    }
+}
+
 // var contoh = () => {
 //     return (test) => {
 //         test('hello')
